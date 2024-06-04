@@ -1,2 +1,34 @@
-<h1>{{ pokemonList[0].name }}</h1>
-<h1>{{ pokemonList[1].name }}</h1>
+<div class="flex flex-col gap-5 p-5 select-none text-muted-foreground">
+    <h1 class="self-center text-2xl">Liste de Pokémons</h1>
+
+    <input
+        class="flex h-10 rounded border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text- focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+        #inputPokemonId
+        (keyup.enter)="selectPokemon(inputPokemonId.value)"
+    />
+
+    <p *ngIf="pokemonSelected">{{ pokemonSelected.name }}</p>
+
+    <div *ngIf="!pokemonSelected" class="flex flex-wrap gap-3 justify-center">
+        <div
+            *ngFor="let pokemon of pokemonList"
+            class="rounded-lg border bg-card text-card-foreground shadow-sm w-72 hover:bg-card-foreground/5 cursor-pointer"
+        >
+            <div class="flex flex-row space-y-1.5 p-6 gap-3">
+                <img
+                    [src]="pokemon.picture"
+                    [alt]="pokemon.name"
+                    class="w-36 h-36"
+                />
+                <div class="flex flex-col">
+                    <h3
+                        class="text-lg font-semibold leading-none tracking-tight"
+                    >
+                        {{ pokemon.name }}
+                    </h3>
+                    <p>{{ pokemon.types }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

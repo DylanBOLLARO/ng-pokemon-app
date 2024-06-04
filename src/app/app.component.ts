@@ -8,14 +8,18 @@ import { Pokemon } from '../shared/models/pokemon'
     styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-    pokemonList = POKEMONS
+    pokemonList: Pokemon[] = POKEMONS
+    pokemonSelected: Pokemon | undefined
 
     ngOnInit(): void {
         console.table(this.pokemonList)
-        this.selectPokemon(this.pokemonList[0])
     }
 
-    selectPokemon(pokemon: Pokemon) {
-        console.log(pokemon)
+    selectPokemon(pokemonId: string) {
+        const pokemon: Pokemon | undefined = this.pokemonList.find(
+            (pokemon) => pokemon.id === +pokemonId
+        )
+
+        this.pokemonSelected = pokemon ? pokemon : undefined
     }
 }
